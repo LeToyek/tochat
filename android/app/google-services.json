@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "277235111228",
+    "project_id": "tochat-62ddc",
+    "storage_bucket": "tochat-62ddc.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:277235111228:android:712ef901fccb9c060fba39",
+        "android_client_info": {
+          "package_name": "com.example.tochat"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "277235111228-jv6j41ltk8gtgjmc7f7dfbjo0egqstqd.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCzyoKJlEi8PROdyySYSLjKK5c_5LN3q3k"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "277235111228-jv6j41ltk8gtgjmc7f7dfbjo0egqstqd.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
