@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:tochat/pages/chat_page.dart';
 import 'package:tochat/pages/register_page.dart';
@@ -10,6 +11,7 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
+  final _auth = FirebaseAuth.instance;
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
 
@@ -58,8 +60,25 @@ class _LoginPageState extends State<LoginPage> {
                             : Icons.visibility_off)),
                     hintText: 'password')),
             MaterialButton(
-              onPressed: () {
-                Navigator.pushReplacementNamed(context, ChatPage.id);
+              onPressed: () async {
+                setState(() {
+                  _isLoading = true;
+                });
+                try {
+                  final email = _emailController.text;
+                  final password = _passwordController.text;
+
+                  await _auth.signInWithEmailAndPassword(
+                      email: email, password: password);
+                  Navigator.pushReplacementNamed(context, ChatPage.id);
+                } catch (e) {
+                  final snackbar = SnackBar(content: Text(e.toString()));
+                  ScaffoldMessenger.of(context).showSnackBar(snackbar);
+                } finally {
+                  setState(() {
+                    _isLoading = false;
+                  });
+                }
               },
               child: Text('Login'),
               color: Colors.blue,
