@@ -35,8 +35,13 @@ class _LoginPageState extends State<LoginPage> {
                     tag: 'ToChat',
                     child: Text(
                       'ToChat',
-                      style: Theme.of(context).textTheme.headline5,
+                      style: Theme.of(context).textTheme.headline4,
                     )),
+            Spacer(),
+            Text(
+              'Login',
+              style: Theme.of(context).textTheme.headline5,
+            ),
             TextField(
               controller: _emailController,
               keyboardType: TextInputType.emailAddress,
@@ -90,7 +95,8 @@ class _LoginPageState extends State<LoginPage> {
             TextButton(
                 onPressed: () =>
                     Navigator.pushReplacementNamed(context, RegisterPage.id),
-                child: Text('Does not have account yet ? register here'))
+                child: Text('Does not have account yet ? register here')),
+            Spacer(),
           ],
         ),
       ),

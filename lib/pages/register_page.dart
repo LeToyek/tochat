@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:tochat/pages/chat_page.dart';
 import 'package:tochat/pages/login_page.dart';
 
 class RegisterPage extends StatefulWidget {
@@ -34,8 +35,13 @@ class _RegisterPageState extends State<RegisterPage> {
                     tag: 'ToChat',
                     child: Text(
                       'ToChat',
-                      style: Theme.of(context).textTheme.headline5,
+                      style: Theme.of(context).textTheme.headline4,
                     )),
+            Spacer(),
+            Text(
+              'Register',
+              style: Theme.of(context).textTheme.headline5,
+            ),
             TextField(
               controller: _emailController,
               keyboardType: TextInputType.emailAddress,
@@ -69,7 +75,7 @@ class _RegisterPageState extends State<RegisterPage> {
 
                   await _auth.createUserWithEmailAndPassword(
                       email: email, password: password);
-                  Navigator.pop(context);
+                  Navigator.pushReplacementNamed(context, ChatPage.id);
                 } catch (e) {
                   final snackbar = SnackBar(content: Text(e.toString()));
                   ScaffoldMessenger.of(context).showSnackBar(snackbar);
@@ -89,7 +95,8 @@ class _RegisterPageState extends State<RegisterPage> {
             TextButton(
                 onPressed: () =>
                     Navigator.pushReplacementNamed(context, LoginPage.id),
-                child: Text('Already have account ? login here'))
+                child: Text('Already have account ? login here')),
+            Spacer()
           ],
         ),
       ),

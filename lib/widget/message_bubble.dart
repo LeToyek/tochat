@@ -1,10 +1,15 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
 class MessageBubble extends StatelessWidget {
-  final String text, sender;
+  final _collection = FirebaseFirestore.instance.collection('messages');
+  final String text, sender, id;
   final bool isMyChat;
   MessageBubble(
-      {required this.text, required this.sender, required this.isMyChat});
+      {required this.text,
+      required this.sender,
+      required this.isMyChat,
+      required this.id});
 
   final bubbleBorderRadius = BorderRadius.only(
     topLeft: Radius.circular(20),
@@ -29,11 +34,26 @@ class MessageBubble extends StatelessWidget {
             style: TextStyle(fontSize: 12, color: Colors.black54),
           ),
           InkWell(
-            onLongPress: () => showDialog(
-                context: context,
-                builder: (BuildContext context) => AlertDialog(
-                      title: Text('delete'),
-                    )),
+            onLongPress: () => isMyChat
+                ? showDialog(
+                    context: context,
+                    builder: (BuildContext context) => AlertDialog(
+                          title: Text('delete'),
+                          actions: [
+                            TextButton(
+                                onPressed: () async {
+                                  await _collection.doc(id).delete();
+                                  Navigator.pop(context);
+                                },
+                                child: Text('Delete')),
+                            TextButton(
+                                onPressed: () {
+                                  Navigator.pop(context);
+                                },
+                                child: Text('Cancel'))
+                          ],
+                        ))
+                : print('ok'),
             child: Material(
               color: isMyChat ? Colors.blue : Colors.white,
               borderRadius: isMyChat ? otherBorderRadius : bubbleBorderRadius,

@@ -62,11 +62,12 @@ class _ChatPageState extends State<ChatPage> {
                       children: snapshot.data!.docs.map((document) {
                         final messageText = document.data()['text'];
                         final messageSender = document.data()['sender'];
+                        final messageId = document.id;
                         return MessageBubble(
-                          text: messageText,
-                          sender: messageSender,
-                          isMyChat: messageSender == _activeUser?.email,
-                        );
+                            text: messageText,
+                            sender: messageSender,
+                            isMyChat: messageSender == _activeUser?.email,
+                            id: messageId);
                       }).toList(),
                     );
                   })),
